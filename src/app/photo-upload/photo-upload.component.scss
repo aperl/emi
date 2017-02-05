@@ -1,0 +1,10 @@
+.box {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  border: dashed 3px gray;
+  color: gray;
+  width: 150px;
+  height: 200px;
+}

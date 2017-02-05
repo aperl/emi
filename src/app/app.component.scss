@@ -1,0 +1,64 @@
+[md-suffix] {
+  width: 40px;
+  height: 1em;
+
+  button {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 5px;
+    right: 0;
+  }
+}
+
+.box {
+  text-align: center;
+  background-size: cover;
+  display: inline-flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  border: dashed 3px gray;
+  color: gray;
+  width: 150px;
+  height: 200px;
+  box-sizing: border-box;
+
+  &.photo {
+    border: none;
+
+    .text {
+      color: white;
+      text-shadow: 0.1em 0.1em 0.2em black;
+      text-align: center;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+
+    button {
+      opacity: 0;
+      transition: opacity .5s;
+    }
+
+    &:hover {
+
+      .text,
+      button {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+$hint-margin: 20px;
+
+md-input,
+md-input-container {
+  margin-bottom: $hint-margin;
+}
+
+[md-button] {
+  margin-top: 8px;
+  margin-bottom: calc(8px + #{$hint-margin});
+}
+

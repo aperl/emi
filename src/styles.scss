@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
+
+md-input .error {
+  display: none;
+  color: md-color(map-get($theme, warn));
+}
+
+md-input.ng-touched.ng-invalid .error {
+  display: block;
+}
+
+md-input-container .error {
+  display: none;
+  color: md-color(map-get($theme, warn));
+}
+
+md-input-container.ng-touched.ng-invalid .error {
+  display: block;
+}
+
+form {
+  display: block;
+  max-width: 500px;
+  margin-left: 200px;
+}
