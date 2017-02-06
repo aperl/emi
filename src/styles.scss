@@ -6,26 +6,51 @@
 
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
 
+body {
+  display: flex;
+  justify-content: center;
+}
+
 md-input .error {
   display: none;
+}
+
+md-input md-hint.error {
   color: md-color(map-get($theme, warn));
 }
 
-md-input.ng-touched.ng-invalid .error {
-  display: block;
+md-input.ng-touched.ng-invalid,
+.submitted md-input.ng-invalid {
+  .md-input-placeholder {
+    color: md-color(map-get($theme, warn));
+  }
+
+  .md-input-underline {
+    border-color: md-color(map-get($theme, warn));
+  }
+
+  .md-input-ripple {
+    background-color: md-color(map-get($theme, warn));
+  }
+
+  .error {
+    display: block;
+  }
 }
 
-md-input-container .error {
-  display: none;
-  color: md-color(map-get($theme, warn));
+md-select.ng-touched.ng-invalid,
+.submitted md-select.ng-invalid {
+
+  .md-select-placeholder {
+    color: md-color(map-get($theme, warn));
+  }
+
+  .md-select-underline {
+    border-color: md-color(map-get($theme, warn));
+  }
+
+  .md-select-ripple {
+    background-color: md-color(map-get($theme, warn));
+  }
 }
 
-md-input-container.ng-touched.ng-invalid .error {
-  display: block;
-}
-
-form {
-  display: block;
-  max-width: 500px;
-  margin-left: 200px;
-}
