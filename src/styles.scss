@@ -4,6 +4,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+@import '~cropperjs/dist/cropper.css';
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
 
 body {
@@ -17,6 +18,10 @@ md-input .error {
 
 md-input md-hint.error {
   color: md-color(map-get($theme, warn));
+}
+
+.md-select-trigger {
+  margin-top: 10px;
 }
 
 md-input.ng-touched.ng-invalid,

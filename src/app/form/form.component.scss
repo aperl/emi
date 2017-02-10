@@ -12,6 +12,36 @@
   }
 }
 
+.full {
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+}
+
+md-card {
+  display: flex;
+  flex-flow: row wrap;
+
+  > div {
+    margin-left: -5px;
+    margin-right: -5px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+
+    > * {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.stretch {
+  flex: 1;
+}
+
 .box {
   text-align: center;
   background-size: cover;

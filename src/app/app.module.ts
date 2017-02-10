@@ -11,13 +11,17 @@ import { AppComponent } from './app.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { FormComponent } from './form/form.component';
 import { SuccessComponent } from './success/success.component';
+import { CardComponent } from './card/card.component';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotoUploadComponent,
     FormComponent,
-    SuccessComponent
+    SuccessComponent,
+    CardComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,

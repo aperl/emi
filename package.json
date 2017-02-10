@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "@types/google-libphonenumber": "^7.4.10",
+    "blueimp-load-image": "^2.10.0",
     "core-js": "^2.4.1",
     "google-libphonenumber": "^2.0.9",
     "lodash": "^4.17.4",

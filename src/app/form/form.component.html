@@ -4,64 +4,71 @@
   <h3>Personal Info</h3>
   <md-card class="name">
     <div>
-      <md-input placeholder="First Name" formControlName="firstName" required>
+      <md-input placeholder="First Name" formControlName="firstName" class="stretch" required>
         <md-hint class="error">Enter first name</md-hint>
       </md-input>
-      <md-input placeholder="Middle Name" formControlName="middleName">
+      <md-input placeholder="Middle Name" formControlName="middleName" class="stretch">
       </md-input>
-      <md-input placeholder="Last Name" formControlName="lastName" required>
+      <md-input placeholder="Last Name" formControlName="lastName" class="stretch" required>
         <md-hint class="error">Enter last name</md-hint>
       </md-input>
-      <md-input type="date" placeholder="Date of Birth" formControlName="dateOfBirth" required>
-        <md-hint class="error">Enter date of birth</md-hint>
+    </div>
+    <div>
+      <md-input placeholder="Date of Birth" formControlName="dateOfBirth" (blur)="formatDate()" style="min-width:210px" class="stretch" required>
+        <md-hint class="error">Enter a valid date</md-hint>
+        <md-hint align="end">format: mm/dd/yyyy</md-hint>
       </md-input>
+      <md-select placeholder="Blood Type" formControlName="bloodType" required #blood>
+        <md-option value="O-">O-</md-option>
+        <md-option value="O+">O+</md-option>
+        <md-option value="A-">A-</md-option>
+        <md-option value="A+">A+</md-option>
+        <md-option value="B-">B-</md-option>
+        <md-option value="B+">B+</md-option>
+        <md-option value="AB-">AB-</md-option>
+        <md-option value="AB+">AB+</md-option>
+      </md-select>
+    </div>
+    <div>
       <md-input placeholder="Phone Number" formControlName="phoneNumber">
         <md-hint class="error">Enter valid phone number</md-hint>
       </md-input>
-      <md-input placeholder="Email Address" formControlName="email">
+      <md-input placeholder="Email Address" formControlName="email" class="stretch">
         <md-hint class="error">Enter valid email address</md-hint>
       </md-input>
+    </div>
+    <div>
       <div>
-        <md-select placeholder="Blood Type" formControlName="bloodType" required #blood>
-          <md-option value="O-">O-</md-option>
-          <md-option value="O+">O+</md-option>
-          <md-option value="A-">A-</md-option>
-          <md-option value="A+">A+</md-option>
-          <md-option value="B-">B-</md-option>
-          <md-option value="B+">B+</md-option>
-          <md-option value="AB-">AB-</md-option>
-          <md-option value="AB+">AB+</md-option>
-        </md-select>
-        <div [hidden]="blood.classList.contains('ng-invalid')">
-          Select blood type
-        </div>
+        Select blood type
       </div>
     </div>
-    <div class="box" [style.background-image]="imgUrl" [ngClass]="{'photo': imgUrl}">
-      <button md-raised-button color="accent" (click)="file.click()">Select Photo</button>
-      <div class="text">
-        or<br/>
-        drop photo here
-      </div>
-      <input hidden type="file" (change)="attachPhoto($event)" #file accept=".jpg,.jpeg,.png" />
-    </div>
+  </md-card>
+  <h3>Photo</h3>
+  <md-card>
+    <app-photo-upload></app-photo-upload>
   </md-card>
 
   <h3>Address</h3>
   <md-card formGroupName="address">
-    <md-input placeholder="Street" formControlName="street" required>
-      <md-hint class="error">Enter address street</md-hint>
-    </md-input>
-    <md-input placeholder="Street 2" formControlName="street2"></md-input>
-    <md-input placeholder="City" formControlName="city" required>
-      <md-hint class="error">Enter city name</md-hint>
-    </md-input>
-    <md-select placeholder="State" formControlName="state" required>
-      <md-option value="Utah">Utah</md-option>
-    </md-select>
-    <md-input placeholder="Zip Code" formControlName="zip" required>
-      <md-hint class="error">Enter a valid zip code</md-hint>
-    </md-input>
+    <div>
+      <md-input class="full" placeholder="Street" formControlName="street" required>
+        <md-hint class="error">Enter address street</md-hint>
+      </md-input>
+    </div>
+    <div>
+      <md-input class="full" placeholder="Street 2" formControlName="street2"></md-input>
+    </div>
+    <div>
+      <md-input placeholder="City" formControlName="city" class="stretch" required>
+        <md-hint class="error">Enter city name</md-hint>
+      </md-input>
+      <md-select placeholder="State" formControlName="state" required>
+        <md-option value="Utah">Utah</md-option>
+      </md-select>
+      <md-input placeholder="Zip Code" formControlName="zip" required>
+        <md-hint class="error">Enter a valid zip code</md-hint>
+      </md-input>
+    </div>
   </md-card>
 
   <h3>Emergency Contacts</h3>
@@ -74,7 +81,7 @@
         <md-input placeholder="Relationship" formControlName="relationship" required>
           <md-hint class="error">Enter relationship</md-hint>
         </md-input>
-        <md-input type="tel" placeholder="Number" formControlName="phoneNumber" required>
+        <md-input type="tel" placeholder="Number" formControlName="phoneNumber" (blur)="formatPhone($event)" required>
           <md-hint class="error">Enter valid phone number</md-hint>
         </md-input>
         <md-select placeholder="Type" formControlName="type">

@@ -1,9 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormControl } from '@angular/forms';
 import * as googlePhoneLib from 'google-libphonenumber';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
+import * as Cropper from 'cropperjs';
+
+import { PhotoUploadComponent } from '../photo-upload/photo-upload.component';
 
 let phoneUtil = googlePhoneLib.PhoneNumberUtil.getInstance();
 
@@ -19,6 +21,14 @@ function phoneValidator(control: AbstractControl): { [key: string]: boolean } {
   } catch (error) {
     return { phone: true };
   }
+  return null;
+}
+
+function dateValidator(control: AbstractControl): { [key: string]: boolean } {
+  if (isNaN(Date.parse(control.value))) {
+    return { date: true };
+  }
+  console.log(new Date(control.value).toLocaleDateString());
   return null;
 }
 
@@ -38,10 +48,10 @@ function emailValidator(control: AbstractControl): { [key: string]: boolean } {
 })
 export class FormComponent {
 
-  imgUrl: SafeStyle;
+  @ViewChild(PhotoUploadComponent) photoUploadComponent: PhotoUploadComponent;
+
   pending = false;
   submitted = false;
-  private img: File;
 
   form: FormGroup;
   contacts: FormArray;
@@ -50,9 +60,10 @@ export class FormComponent {
   medications: FormArray;
   allergies: FormArray;
 
+  a: FormControl;
+
   constructor(
     private fb: FormBuilder,
-    private sanitizer: DomSanitizer,
     private http: Http,
     private router: Router,
     private element: ElementRef) {
@@ -67,7 +78,7 @@ export class FormComponent {
       firstName: ['', Validators.required],
       middleName: [''],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
+      dateOfBirth: ['', [Validators.required, dateValidator]],
       phoneNumber: ['', phoneValidator],
       email: ['', emailValidator],
       bloodType: ['', Validators.required],
@@ -79,6 +90,27 @@ export class FormComponent {
       allergies: this.allergies,
       otherInfo: ['']
     });
+
+    let cardJson = localStorage.getItem('card');
+
+    if (cardJson) {
+      this.form.setValue(JSON.parse(cardJson));
+    }
+
+    this.form.valueChanges.subscribe((value) => {
+      localStorage.setItem('card', JSON.stringify(value));
+    });
+  }
+
+  formatDate() {
+    let ctrl = this.form.get('dateOfBirth');
+    if (ctrl.valid) {
+      ctrl.setValue(new Date(ctrl.value).toLocaleDateString());
+    }
+  }
+
+  formatPhone(event) {
+    event.toString();
   }
 
   makeAddressGroup() {
@@ -131,23 +163,13 @@ export class FormComponent {
     this.contacts.removeAt(index);
   }
 
-  attachPhoto(event: Event) {
-    let el = event.currentTarget as HTMLInputElement;
-
-    this.imgUrl = this.sanitizer.bypassSecurityTrustStyle('url(' + window.URL.createObjectURL(el.files.item(0)) + ')');
-    this.img = el.files.item(0);
-    // let reader = new FileReader();
-    // reader.readAsDataURL(el.files.item(0));
-    // reader.onload = () => {
-    //   this.img = reader.url;
-    // };
-  }
 
   private getTop(element: HTMLElement) {
     let top = element.offsetTop;
-
     return element.offsetTop + (element.offsetParent ? this.getTop(element.offsetParent as HTMLElement) : 0);
+  }
 
+  cropChanged() {
 
   }
 
@@ -166,24 +188,27 @@ export class FormComponent {
     }
 
     this.pending = true;
-    let formData = new FormData();
-    let headers = new Headers();
-    if (this.img) {
-      formData.append('image', this.img, this.img.name);
-      headers.append('Content-Type', 'multipart/form-data');
-    }
-    formData.append('data', JSON.stringify(this.form.value));
-    headers.append('Accept', 'application/json');
-    let options = new RequestOptions({ headers: headers });
-    this.http.post('api/card', formData, options).subscribe((result) => {
-      let response = result.json();
-      if (!response.error) {
-        this.router.navigate(['success']);
+    this.photoUploadComponent.getImage().then((img) => {
+      let formData = new FormData();
+      let headers = new Headers();
+      if (img) {
+        formData.append('image', img, 'image.jpeg');
       }
-    }, (error) => { }
 
-    , () => {
-      this.pending = false;
+      formData.append('data', JSON.stringify(this.form.value));
+      headers.append('Accept', 'application/json');
+      let options = new RequestOptions({ headers: headers });
+      this.http.post('api/card', formData, options).subscribe((result) => {
+        let response = result.json();
+        if (!response.error) {
+          localStorage.removeItem('card');
+          this.router.navigate(['success']);
+        }
+      }, (error) => { }
+
+      , () => {
+        this.pending = false;
+      });
     });
   }
 
