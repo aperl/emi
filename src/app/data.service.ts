@@ -138,6 +138,8 @@ export class DataService {
         formData.append('image', this.croppedImage, 'image.jpeg');
       }
 
+      this.formValue.count = this.count;
+
       formData.append('data', JSON.stringify(this.formValue));
       headers.append('Accept', 'application/json');
       let options = new RequestOptions({ headers: headers });
