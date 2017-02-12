@@ -13,11 +13,18 @@ export class DataService {
   private _cropData: Data;
   private _croppedImage: Blob;
   private _image: Blob;
+  private _count: number;
 
   private _valid = false;
 
   constructor(private http: Http) {
     if (storage) {
+      try {
+        let data = storage.getItem('count');
+        if (data) {
+          this._count = JSON.parse(data);
+        }
+      } catch (error) {}
       try {
         let data = storage.getItem('valid');
         if (data) {
@@ -38,6 +45,17 @@ export class DataService {
         }
       } catch (error) {}
       // TODO: deserialize Image;
+    }
+  }
+
+  get count(): number {
+    return this._count;
+  }
+
+  set count(value) {
+    this._count = value;
+    if (storage) {
+      storage.setItem('count', JSON.stringify(value));
     }
   }
 

@@ -4,10 +4,10 @@
   border: dashed 1px #ddd;
   padding: 0;
 
-  width: 252px;
-  height: 144px;
+  width: 336px;
+  height: 192px;
 
-  font-size: 8px;
+  font-size: 10px;
 
   flex-direction: column;
   vertical-align: top;
@@ -56,12 +56,12 @@ img {
 .header {
   background-color: darkred;
   color: white;
-  font-size: 10px;
+  font-size: 16px;
   padding: 5px;
   -webkit-print-color-adjust: exact;
 
   md-icon {
-    font-size: 16px;
+    font-size: 24px;
     width: auto;
     height: auto;
     vertical-align: middle;
@@ -81,7 +81,7 @@ img {
 }
 
 h2 {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 1px;
   margin-top: 1px;
 }
