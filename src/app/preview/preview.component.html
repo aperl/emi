@@ -10,9 +10,9 @@ Please indicate how many copies of this card you would like printed.</p>
   <md-input formControlName="count" type="number" placeholder="Count">
     <md-hint class="error">Must be from 1 to 5</md-hint>
   </md-input>
-  <div class="button-bar">
-    <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
-    <button md-raised-button color="accent" (click)="print()"><md-icon>print</md-icon> PRINT</button>
-    <button md-raised-button color="primary" (click)="upload()"><md-icon>file_upload</md-icon> SUBMIT</button>
-  </div>
 </form>
+<div class="button-bar">
+  <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
+  <button md-raised-button color="accent" (click)="print()"><md-icon>print</md-icon> PRINT</button>
+  <button md-raised-button color="primary" (click)="upload()"><md-icon>file_upload</md-icon> SUBMIT</button>
+</div>

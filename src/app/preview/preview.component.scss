@@ -24,3 +24,8 @@ md-progress-bar {
   top: 0;
   left: 0;
 }
+
+:host {
+  max-width: 680px;
+  display: block;
+}
