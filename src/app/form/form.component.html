@@ -52,7 +52,8 @@
         <md-hint class="error">Enter city name</md-hint>
       </md-input>
       <md-select placeholder="State" formControlName="state" required>
-        <md-option value="UT">Utah</md-option>
+
+        <md-option *ngFor="let state of states" [value]="state.code">{{ state.name }}</md-option>
       </md-select>
       <md-input placeholder="Zip Code" formControlName="zip" required>
         <md-hint class="error">Enter a valid zip code</md-hint>

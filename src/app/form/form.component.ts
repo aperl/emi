@@ -4,6 +4,7 @@ import * as googlePhoneLib from 'google-libphonenumber';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import * as Cropper from 'cropperjs';
+import { states } from '../states';
 
 import { PhotoUploadComponent } from '../photo-upload/photo-upload.component';
 
@@ -55,6 +56,8 @@ export class FormComponent implements AfterViewInit {
 
   pending = false;
   submitted = false;
+
+  states = states;
 
   form: FormGroup;
   contacts: FormArray;
