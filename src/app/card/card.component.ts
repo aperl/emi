@@ -10,6 +10,8 @@ export class CardComponent implements OnInit {
   @Input() data: any;
   @Input() imageUrl: string;
 
+  date = new Date().toLocaleDateString();
+
   phoneUtils = new googlePhoneLib.PhoneNumberUtil();
 
   constructor() { }

@@ -28,6 +28,12 @@
   justify-content: space-around;
 }
 
+.date {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
 .fields {
   display: flex;
   flex-flow: column;
