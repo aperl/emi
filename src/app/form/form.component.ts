@@ -106,7 +106,6 @@ export class FormComponent implements AfterViewInit {
       lastName: [value.lastName || '', Validators.required],
       dateOfBirth: [value.dateOfBirth || '', [Validators.required, dateValidator]],
       phoneNumber: [value.phoneNumber || '', phoneValidator],
-      email: [value.email || '', emailValidator],
       bloodType: [value.bloodType || '', Validators.required],
       address: value.address ? this.makeAddressGroup(value.address) : this.makeAddressGroup(),
       emergencyContacts: this.contacts,

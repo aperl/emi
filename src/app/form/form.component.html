@@ -17,6 +17,9 @@
         <md-hint class="error">Enter a valid date</md-hint>
         <md-hint align="end">format: mm/dd/yyyy</md-hint>
       </md-input>
+      <md-input placeholder="Phone Number" formControlName="phoneNumber">
+        <md-hint class="error">Enter valid phone number</md-hint>
+      </md-input>
       <md-select placeholder="Blood Type" formControlName="bloodType" required #blood>
         <md-option value="O-">O-</md-option>
         <md-option value="O+">O+</md-option>
@@ -27,14 +30,6 @@
         <md-option value="AB-">AB-</md-option>
         <md-option value="AB+">AB+</md-option>
       </md-select>
-    </div>
-    <div>
-      <md-input placeholder="Phone Number" formControlName="phoneNumber">
-        <md-hint class="error">Enter valid phone number</md-hint>
-      </md-input>
-      <md-input placeholder="Email Address" formControlName="email" class="stretch">
-        <md-hint class="error">Enter valid email address</md-hint>
-      </md-input>
     </div>
   </md-card>
   <h3>Photo</h3>
@@ -121,9 +116,12 @@
         </md-input>
         <md-input placeholder="Dosage" formControlName="dosage">
           <md-hint class="error">Enter dossage</md-hint>
+          <md-hint class="error">Enter frequency</md-hint>
+          <md-hint align="end">example: 25mg</md-hint>
         </md-input>
         <md-input placeholder="Frequency" formControlName="frequency">
           <md-hint class="error">Enter frequency</md-hint>
+          <md-hint align="end">example: 2xDay</md-hint>
         </md-input>
         <button md-icon-button (click)="medications.removeAt(i)" md-tooltip="Remove Condition"><md-icon >close</md-icon></button>
       </div>
