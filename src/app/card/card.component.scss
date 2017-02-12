@@ -1,0 +1,85 @@
+.front,
+.back {
+  display: inline-flex;
+  border: dashed 1px #ddd;
+  padding: 0;
+
+  width: 252px;
+  height: 144px;
+
+  font-size: 8px;
+
+  flex-direction: column;
+  vertical-align: top;
+
+  box-sizing: border-box;
+
+
+  *:not(md-icon) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+
+.front {
+  border-right: none;
+}
+
+.back .fields{
+  justify-content: space-around;
+}
+
+.fields {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.evenCondition {
+  font-weight: bold;
+}
+
+img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+}
+
+.header {
+  background-color: darkred;
+  color: white;
+  font-size: 10px;
+  padding: 5px;
+  -webkit-print-color-adjust: exact;
+
+  md-icon {
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.content {
+  padding: 0 5px 5px 5px;
+  flex: 1;
+  position: relative;
+}
+
+h2 {
+  font-size: 9px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+:host {
+  display: block;
+}

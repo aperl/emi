@@ -4,13 +4,13 @@
   font-family: 'Roboto', sans-serif;
 }
 
-@import '~cropperjs/dist/cropper.css';
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
-
 body {
   display: flex;
   justify-content: center;
 }
+
+@import '~cropperjs/dist/cropper.css';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
 
 md-input .error {
   display: none;

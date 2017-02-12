@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy proxy.config.json",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
@@ -23,8 +23,8 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "@types/google-libphonenumber": "^7.4.10",
-    "blueimp-load-image": "^2.10.0",
     "core-js": "^2.4.1",
+    "cropperjs": "^1.0.0-beta.1",
     "google-libphonenumber": "^2.0.9",
     "lodash": "^4.17.4",
     "rxjs": "^5.0.1",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
+    "@types/cropperjs": "0.0.23",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "angular-cli": "1.0.0-beta.24",

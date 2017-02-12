@@ -1,4 +1,3 @@
-<md-progress-bar mode="indeterminate" *ngIf="pending"></md-progress-bar>
 <form [formGroup]="form" [ngClass]="{submitted: submitted}" novalidate>
   <h1>Emergency Medical ID From</h1>
   <h3>Personal Info</h3>
@@ -37,15 +36,10 @@
         <md-hint class="error">Enter valid email address</md-hint>
       </md-input>
     </div>
-    <div>
-      <div>
-        Select blood type
-      </div>
-    </div>
   </md-card>
   <h3>Photo</h3>
   <md-card>
-    <app-photo-upload></app-photo-upload>
+    <app-photo-upload (cropChanged)="cropChanged($event)" (photoChanged)="imageChanged($event)"></app-photo-upload>
   </md-card>
 
   <h3>Address</h3>
@@ -63,7 +57,7 @@
         <md-hint class="error">Enter city name</md-hint>
       </md-input>
       <md-select placeholder="State" formControlName="state" required>
-        <md-option value="Utah">Utah</md-option>
+        <md-option value="UT">Utah</md-option>
       </md-select>
       <md-input placeholder="Zip Code" formControlName="zip" required>
         <md-hint class="error">Enter a valid zip code</md-hint>
@@ -84,12 +78,6 @@
         <md-input type="tel" placeholder="Number" formControlName="phoneNumber" (blur)="formatPhone($event)" required>
           <md-hint class="error">Enter valid phone number</md-hint>
         </md-input>
-        <md-select placeholder="Type" formControlName="type">
-          <md-option value="home">Home</md-option>
-          <md-option value="cell">Cell</md-option>
-          <md-option value="buisness">Buisness</md-option>
-          <md-option value="other">Other</md-option>
-        </md-select>
         <button md-icon-button (click)="contacts.removeAt(i)" md-tooltip="Remove Contact"><md-icon >close</md-icon></button>
       </div>
     </div>
@@ -158,7 +146,7 @@
     <md-input placeholder="Other Information" formControlName="otherInfo"></md-input>
   </md-card>
 
-  <button type="submit" (click)="submit()" md-raised-button color="primary">Submit</button>
+  <button (click)="submit()" md-raised-button color="primary">View Preview</button>
 
 </form>
 

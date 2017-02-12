@@ -1,3 +1,51 @@
-<p>
-  card works!
-</p>
+<div class="front">
+  <div class="header">
+    <md-icon>local_hospital</md-icon><div>Emergency Medical Identification</div>
+  </div>
+  <div class="content">
+    <img [hidden]="!imageUrl" [src]="imageUrl"/>
+    <div class="fields">
+      <div>
+        <h2>{{data?.firstName}} {{data?.middleName}} {{data?.lastName}} DOB: {{ data?.dateOfBirth }}</h2>
+        <div>{{data?.address?.street}}</div>
+        <div>{{data?.address?.street2}}</div>
+        <div>{{data?.address?.city}}, {{data?.address?.state}} {{data?.address?.zip}}&nbsp;&nbsp;{{data?.email}}</div>
+        <div>{{formatPhone(data?.phoneNumber)}} Blood Type: {{data?.bloodType}}</div>
+      </div>
+      <div *ngIf="data?.emergencyContacts?.length">
+        <h2>Emergency Contacts</h2>
+        <div *ngFor="let contact of data?.emergencyContacts">
+          {{contact.name}}-<i>{{contact.relationship}}</i> {{formatPhone(contact.phoneNumber)}}
+        </div>
+      </div>
+      <div *ngIf="data?.physicians?.length">
+        <h2>Physicians</h2>
+        <div *ngFor="let physician of data?.physicians">
+          {{physician.name}} {{formatPhone(physician.phoneNumber)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div><div class="back content">
+  <div class="fields">
+    <div>
+      <h2>Medical Conditions</h2>
+      <span *ngIf="!data?.medicalConditions.length">none</span>
+      <span *ngFor="let condition of data?.medicalConditions; let even=even" [ngClass]="{evenCondition: even}"> {{ condition }} </span>
+    </div>
+    <div>
+      <h2>Medications</h2>
+      <span *ngIf="!data?.medications.length">none</span>
+      <span *ngFor="let med of data?.medications; let even=even" [ngClass]="{evenCondition: even}"> {{ med.medication }} {{ med.dosage }}- {{ med.frequency }}</span>
+    </div>
+    <div>
+      <h2>Allergies</h2>
+      <span *ngIf="!data?.allergies.length">none</span>
+      <span *ngFor="let allergy of data?.allergies; let even=even" [ngClass]="{evenCondition: even}">{{ allergy }} </span>
+    </div>
+    <div *ngIf="data?.otherInfo">
+      <h2>Other Information</h2>
+      <span>{{ data?.otherInfo }}</span>
+    </div>
+  </div>
+</div>

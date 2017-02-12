@@ -1,3 +1,7 @@
-<p>
-  preview works!
-</p>
+<md-progress-bar mode="indeterminate" *ngIf="pending"></md-progress-bar>
+<app-card [data]="card" [imageUrl]="imgUrl"></app-card>
+<div class="button-bar">
+  <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
+  <button md-raised-button color="accent" (click)="print()"><md-icon>print</md-icon> PRINT</button>
+  <button md-raised-button color="primary" (click)="upload()"><md-icon>file_upload</md-icon> UPLOAD</button>
+</div>

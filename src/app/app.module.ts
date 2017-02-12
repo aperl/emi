@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 
 import { appRoutes } from './app.routes';
 
+import { DataService } from './data.service';
+
 import { AppComponent } from './app.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { FormComponent } from './form/form.component';
@@ -31,7 +33,7 @@ import { PreviewComponent } from './preview/preview.component';
     MaterialModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
