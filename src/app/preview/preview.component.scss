@@ -6,6 +6,18 @@
   }
 }
 
+.print-hide {
+  @media print {
+    display: none;
+  }
+}
+
+.print-show {
+  @media screen {
+    display: none;
+  }
+}
+
 md-progress-bar {
   width: 100%;
   position: fixed;

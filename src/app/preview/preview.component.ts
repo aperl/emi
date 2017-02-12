@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from '../data.service';
+
+function countValidator(ctrl: AbstractControl): { [key: string]: any } {
+  let val = parseInt(ctrl.value, 10);
+  if(val < 1 || val > 5) {
+    return { count: true };
+  }
+
+  return null;
+}
+
 
 @Component({
   selector: 'app-preview',
@@ -13,15 +24,35 @@ export class PreviewComponent implements OnInit {
   card: any;
   imgUrl: SafeUrl;
   pending = false;
+  form: FormGroup;
+
+  cards: boolean[] = [];
 
   constructor(
     private data: DataService,
     private sanitizer: DomSanitizer,
-    private router: Router) {
+    private router: Router,
+    private fb: FormBuilder,
+    private element: ElementRef) {
 
     if (!data.formValue || !data.valid) {
       router.navigate(['/']);
     }
+
+    this.form = fb.group({
+      count: [1, [Validators.required, countValidator]]
+    });
+
+    this.form.get('count').valueChanges.subscribe((value) => {
+      let count = parseInt(value, 10);
+      if (count >= 1 && count <= 5) {
+        this.cards = [];
+        for (let i = 0; i < count - 1; i++) {
+          this.cards.push(true);
+        }
+      }
+
+    });
 
     this.card = data.formValue;
     if (this.data.croppedImage) {
@@ -34,6 +65,12 @@ export class PreviewComponent implements OnInit {
   }
 
   upload() {
+    if (this.form.invalid) {
+      let input = (this.element.nativeElement as HTMLElement).querySelector('md-input.ng-invalid input') as HTMLInputElement;
+      input.select();
+
+      return;
+    }
     this.pending = true;
     this.data.sendData().then((v) => {
       this.router.navigate(['/success']);
