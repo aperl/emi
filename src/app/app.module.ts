@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 
 import { appRoutes } from './app.routes';
 
@@ -31,7 +31,7 @@ import { PreviewComponent } from './preview/preview.component';
     ReactiveFormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
