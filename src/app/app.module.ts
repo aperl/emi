@@ -15,6 +15,7 @@ import { FormComponent } from './form/form.component';
 import { SuccessComponent } from './success/success.component';
 import { CardComponent } from './card/card.component';
 import { PreviewComponent } from './preview/preview.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PreviewComponent } from './preview/preview.component';
     FormComponent,
     SuccessComponent,
     CardComponent,
-    PreviewComponent
+    PreviewComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,9 @@ import { PreviewComponent } from './preview/preview.component';
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MessageDialogComponent
+  ]
 })
 export class AppModule { }

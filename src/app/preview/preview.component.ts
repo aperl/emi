@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from '../data.service';
+import { MdDialog } from '@angular/material';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 function countValidator(ctrl: AbstractControl): { [key: string]: any } {
   let val = parseInt(ctrl.value, 10);
@@ -17,7 +19,7 @@ function countValidator(ctrl: AbstractControl): { [key: string]: any } {
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
-  styleUrls: ['./preview.component.scss']
+  styleUrls: ['./preview.component.scss'],
 })
 export class PreviewComponent implements OnInit {
 
@@ -25,6 +27,7 @@ export class PreviewComponent implements OnInit {
   imgUrl: SafeUrl;
   pending = false;
   form: FormGroup;
+  printed = false;
 
   cards: boolean[] = [];
 
@@ -33,7 +36,8 @@ export class PreviewComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private router: Router,
     private fb: FormBuilder,
-    private element: ElementRef) {
+    private element: ElementRef,
+    private dialog: MdDialog) {
 
     if (!data.formValue || !data.valid) {
       router.navigate(['/']);
@@ -60,8 +64,19 @@ export class PreviewComponent implements OnInit {
     }
   }
 
+  next() {
+    this.data.clearData();
+    this.router.navigate(['/']);
+  }
+
   print() {
-    window.print();
+    let dialog = this.dialog.open(MessageDialogComponent);
+    dialog.afterClosed().subscribe((isPrint) => {
+      if (isPrint) {
+        window.print();
+        this.printed = true;
+      }
+    });
   }
 
   upload() {
@@ -76,7 +91,7 @@ export class PreviewComponent implements OnInit {
       this.router.navigate(['/success']);
       this.pending = false;
     }, (error) => {
-      alert("Error: Let Allen Know something is broken (allenperl@gmail.com)\n" + error.toString());
+      alert("Error: Please let Allen know something is broken (allenperl@gmail.com)\n\n" + error.toString());
       this.pending = false;
     });
   }

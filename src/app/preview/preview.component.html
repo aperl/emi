@@ -13,6 +13,7 @@ Please indicate how many copies of this card you would like printed.</p>
 </form>
 <div class="button-bar">
   <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
+  <button md-raised-button *ngIf="printed" (click)="next()">CREATE NEXT CARD</button>
   <button md-raised-button color="accent" (click)="print()"><md-icon>print</md-icon> PRINT</button>
   <button md-raised-button color="primary" (click)="upload()"><md-icon>file_upload</md-icon> SUBMIT</button>
 </div>
