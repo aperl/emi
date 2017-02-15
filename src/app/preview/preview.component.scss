@@ -25,6 +25,11 @@ md-progress-bar {
   left: 0;
 }
 
+md-input,
+md-input-container {
+  margin-bottom: 10px;
+}
+
 :host {
   max-width: 680px;
   display: block;

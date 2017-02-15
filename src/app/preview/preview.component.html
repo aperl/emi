@@ -4,13 +4,13 @@
   <p>You can choose to print your card from home now by clicking the print button below. You can also choose to submit your information and it will be printed and brought to the activity for you.
 Please indicate how many copies of this card you would like printed.</p>
 </div>
-<app-card [data]="card" [imageUrl]="imgUrl"></app-card>
-<app-card class="print-show" *ngFor="let a of cards" [data]="card" [imageUrl]="imgUrl"></app-card>
 <form class="print-hide" [formGroup]="form">
   <md-input formControlName="count" type="number" placeholder="Count">
     <md-hint class="error">Must be from 1 to 5</md-hint>
   </md-input>
 </form>
+<app-card [data]="card" [imageUrl]="imgUrl"></app-card>
+<app-card class="print-show" *ngFor="let a of cards" [data]="card" [imageUrl]="imgUrl"></app-card>
 <div class="button-bar">
   <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
   <button md-raised-button *ngIf="printed" (click)="next()">CREATE NEXT CARD</button>
