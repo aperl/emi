@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import * as Cropper from 'cropperjs';
 import { states } from '../states';
+import * as moment from 'moment';
 
 import { PhotoUploadComponent } from '../photo-upload/photo-upload.component';
 
@@ -29,7 +30,7 @@ function dateValidator(control: AbstractControl): { [key: string]: boolean } {
   if (!control.value) {
     return null;
   }
-  if (isNaN(Date.parse(control.value))) {
+  if (!moment(control.value).isValid()) {
     return { date: true };
   }
   return null;
@@ -139,7 +140,7 @@ export class FormComponent implements AfterViewInit {
   formatDate() {
     let ctrl = this.form.get('dateOfBirth');
     if (ctrl.valid && ctrl.value) {
-      let val = new Date(ctrl.value).toLocaleDateString()
+      let val = moment(ctrl.value).format('M/D/Y');
       if (val !== ctrl.value) {
         ctrl.setValue(val);
       }
@@ -150,7 +151,7 @@ export class FormComponent implements AfterViewInit {
     event.toString();
   }
 
-  makeAddressGroup(address = {street: '', street2: '', city: 'Orem', state: 'UT', zip: '84097'}) {
+  makeAddressGroup(address = {street: '', street2: '', city: 'Orem',state: 'UT', zip: '84097'}) {
     return this.fb.group({
       street: [address.street, Validators.required],
       street2: [address.street2],
