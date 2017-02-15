@@ -34,7 +34,7 @@
   </md-card>
   <h3>Photo</h3>
   <md-card>
-    <app-photo-upload (cropChanged)="cropChanged($event)" (photoChanged)="imageChanged($event)"></app-photo-upload>
+    <app-photo-upload (cropChanged)="cropChanged($event)" [photo]="photo" [cropData]="cropData" (photoChanged)="imageChanged($event)"></app-photo-upload>
   </md-card>
 
   <h3>Address</h3>

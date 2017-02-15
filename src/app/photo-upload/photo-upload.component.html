@@ -1,5 +1,5 @@
 <button md-raised-button color="accent" (click)="file.click()">Select Photo</button>
 <div class="container">
-  <img class="image"/>
+  <img [src]="img ? img : ''" class="image"/>
 </div>
 <input hidden type="file" (change)="attachPhoto($event)" #file accept=".jpg,.jpeg,.png" />

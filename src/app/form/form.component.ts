@@ -51,7 +51,7 @@ function emailValidator(control: AbstractControl): { [key: string]: boolean } {
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements AfterViewInit {
+export class FormComponent {
 
   @ViewChild(PhotoUploadComponent) photoUploadComponent: PhotoUploadComponent;
 
@@ -59,6 +59,8 @@ export class FormComponent implements AfterViewInit {
   submitted = false;
 
   states = states;
+  cropData: Cropper.Data;
+  photo: Blob;
 
   form: FormGroup;
   contacts: FormArray;
@@ -76,6 +78,9 @@ export class FormComponent implements AfterViewInit {
     private element: ElementRef) {
 
     let value = this.data.formValue;
+
+    this.cropData = this.data.cropData;
+    this.photo = this.data.image;
 
     if (value) {
       try {
@@ -128,15 +133,6 @@ export class FormComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    if (this.data.image) {
-      this.photoUploadComponent.setPhoto(this.data.image);
-    }
-    if (this.data.cropData) {
-      this.photoUploadComponent.cropper.setData(this.data.cropData);
-    }
-  }
-
   formatDate() {
     let ctrl = this.form.get('dateOfBirth');
     if (ctrl.valid && ctrl.value) {
@@ -151,7 +147,7 @@ export class FormComponent implements AfterViewInit {
     event.toString();
   }
 
-  makeAddressGroup(address = {street: '', street2: '', city: 'Orem',state: 'UT', zip: '84097'}) {
+  makeAddressGroup(address = {street: '', street2: '', city: 'Orem', state: 'UT', zip: '84097'}) {
     return this.fb.group({
       street: [address.street, Validators.required],
       street2: [address.street2],
