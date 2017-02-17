@@ -15,8 +15,9 @@ import { FormComponent } from './form/form.component';
 import { SuccessComponent } from './success/success.component';
 import { CardComponent } from './card/card.component';
 import { PreviewComponent } from './preview/preview.component';
-import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { PrintDialogComponent } from './print-dialog/print-dialog.component';
 import { PrintComponent } from './print/print.component';
+import { BloodDialogComponent } from './blood-dialog/blood-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,9 @@ import { PrintComponent } from './print/print.component';
     SuccessComponent,
     CardComponent,
     PreviewComponent,
-    MessageDialogComponent,
-    PrintComponent
+    PrintDialogComponent,
+    PrintComponent,
+    BloodDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { PrintComponent } from './print/print.component';
   providers: [DataService],
   bootstrap: [AppComponent],
   entryComponents: [
-    MessageDialogComponent
+    PrintDialogComponent,
+    BloodDialogComponent
   ]
 })
 export class AppModule { }

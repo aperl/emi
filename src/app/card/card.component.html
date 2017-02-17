@@ -10,7 +10,7 @@
         <div>{{data?.address?.street}}</div>
         <div>{{data?.address?.street2}}</div>
         <div>{{data?.address?.city}}, {{data?.address?.state}} {{data?.address?.zip}}&nbsp;&nbsp;{{data?.email}}</div>
-        <div>{{formatPhone(data?.phoneNumber)}} Blood Type: {{data?.bloodType}}</div>
+        <div>{{formatPhone(data?.phoneNumber)}} <span *ngIf="data?.bloodType && data?.bloodType !== 'unknown'">Blood Type: {{data?.bloodType}}</span></div>
       </div>
       <div *ngIf="data?.emergencyContacts?.length">
         <h2>Emergency Contacts</h2>

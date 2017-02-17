@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { MdDialog } from '@angular/material';
+import { BloodDialogComponent } from '../blood-dialog/blood-dialog.component';
 import * as googlePhoneLib from 'google-libphonenumber';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
@@ -75,7 +77,8 @@ export class FormComponent {
     private fb: FormBuilder,
     private router: Router,
     private data: DataService,
-    private element: ElementRef) {
+    private element: ElementRef,
+    private dialog: MdDialog) {
 
     let value = this.data.formValue;
 
@@ -123,6 +126,12 @@ export class FormComponent {
       medications: this.medications,
       allergies: this.allergies,
       otherInfo: [value.otherInfo || '']
+    });
+
+    this.form.get('bloodType').valueChanges.subscribe((bloodType) => {
+      if (bloodType === '') {
+        dialog.open(BloodDialogComponent);
+      }
     });
 
     this.form.valueChanges.subscribe((formValue) => {

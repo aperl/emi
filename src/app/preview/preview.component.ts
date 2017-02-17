@@ -4,7 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import { MdDialog } from '@angular/material';
-import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+import { PrintDialogComponent } from '../print-dialog/print-dialog.component';
 
 function countValidator(ctrl: AbstractControl): { [key: string]: any } {
   let val = parseInt(ctrl.value, 10);
@@ -70,10 +70,11 @@ export class PreviewComponent implements OnInit {
   }
 
   print() {
-    let dialog = this.dialog.open(MessageDialogComponent);
+    let dialog = this.dialog.open(PrintDialogComponent);
     dialog.afterClosed().subscribe((isPrint) => {
       if (isPrint) {
         window.print();
+        this.data.sendPrint();
         this.printed = true;
       }
     });

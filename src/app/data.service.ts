@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import * as Cropper from 'cropperjs';
 import { environment } from '../environments/environment';
-import 'rxjs/Rx';   
+import 'rxjs/Rx';
 
 let storage = environment.storage;
 
@@ -141,6 +141,17 @@ export class DataService {
       });
       return cards;
     });
+  }
+
+  sendPrint(): Promise<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/print', JSON.stringify({
+      firstName: this.formValue.firstName,
+      lastName: this.formValue.lastName
+    }), {
+      headers: headers
+    }).toPromise();
   }
 
   sendData(): Promise<any> {
