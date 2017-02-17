@@ -16,6 +16,7 @@ import { SuccessComponent } from './success/success.component';
 import { CardComponent } from './card/card.component';
 import { PreviewComponent } from './preview/preview.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { PrintComponent } from './print/print.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     SuccessComponent,
     CardComponent,
     PreviewComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,

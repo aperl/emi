@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import * as Cropper from 'cropperjs';
 import { environment } from '../environments/environment';
+import 'rxjs/Rx';   
 
 let storage = environment.storage;
 
@@ -130,6 +131,18 @@ export class DataService {
     this._image = null;
   }
 
+  getAllCards(): Promise<ICard[]> {
+    return this.http.get('api/card').toPromise().then(resp => {
+      let cards = resp.json() as ICard[];
+      cards.forEach((card) => {
+        if(card.image) {
+          card.imageUrl = '/api/images/' + card.image;
+        }
+      });
+      return cards;
+    });
+  }
+
   sendData(): Promise<any> {
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -154,4 +167,47 @@ export class DataService {
       }, reject);
     });
   }
+}
+
+export interface ICard {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+  bloodType: string;
+  address: IAddress;
+  emergencyContacts: IContact[];
+  physicians: IPhysician[];
+  medicalConditions: string[];
+  medications: IMedication[];
+  allergies: string[];
+  otherInfo: string;
+  image?: string;
+  imageUrl?: string;
+}
+
+export interface IAddress {
+  street: string;
+  street2: string;
+  city: string;
+  state: string;
+  zip: string;
+}
+
+export interface IContact {
+  name: string;
+  relationship: string;
+  phoneNumber: string;
+}
+
+export interface IPhysician {
+  name: string;
+  phoneNumber: string;
+}
+
+export interface IMedication {
+  medication: string;
+  dosage: string;
+  frequency: string;
 }
