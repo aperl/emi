@@ -84,6 +84,13 @@ h2 {
   font-size: 12px;
   margin-bottom: 1px;
   margin-top: 1px;
+
+  > span {
+    background: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px rgba(255,255,255,1);
+    padding-right: 5px;
+  }
 }
 
 :host {

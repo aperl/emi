@@ -6,7 +6,7 @@
     <img [hidden]="!imageUrl" [src]="imageUrl"/>
     <div class="fields">
       <div>
-        <h2>{{data?.firstName}} {{data?.middleName}} {{data?.lastName}} DOB: {{ data?.dateOfBirth }}</h2>
+        <h2><span>{{data?.firstName}} {{data?.middleName}} {{data?.lastName}} DOB: {{ data?.dateOfBirth }}</span></h2>
         <div>{{data?.address?.street}}</div>
         <div>{{data?.address?.street2}}</div>
         <div>{{data?.address?.city}}, {{data?.address?.state}} {{data?.address?.zip}}&nbsp;&nbsp;{{data?.email}}</div>
