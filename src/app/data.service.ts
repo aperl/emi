@@ -136,7 +136,7 @@ export class DataService {
       let cards = resp.json() as ICard[];
       cards.forEach((card) => {
         if(card.image) {
-          card.imageUrl = '/api/images/' + card.image;
+          card.imageUrl = '/images/' + card.image;
         }
       });
       return cards;

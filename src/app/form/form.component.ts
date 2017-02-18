@@ -129,7 +129,7 @@ export class FormComponent {
     });
 
     this.form.get('bloodType').valueChanges.subscribe((bloodType) => {
-      if (bloodType === '') {
+      if (bloodType === 'unknown') {
         dialog.open(BloodDialogComponent);
       }
     });
