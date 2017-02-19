@@ -7,7 +7,7 @@
   width: 336px;
   height: 192px;
 
-  font-size: 10px;
+  font-size: 9px;
 
   flex-direction: column;
   vertical-align: top;
@@ -36,9 +36,11 @@
 
 .fields {
   display: flex;
+  padding: 0 5px 5px 5px;
   flex-flow: column;
   justify-content: space-between;
   height: 100%;
+  box-sizing: border-box;
 }
 
 .evenCondition {
@@ -46,10 +48,9 @@
 }
 
 img {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
+  // position: absolute;
+  // top: 0;
+  height: 156px;
   z-index: -1;
 }
 
@@ -74,10 +75,16 @@ img {
   }
 }
 
+.together {
+  display: inline-block;
+}
+
 .content {
-  padding: 0 5px 5px 5px;
   flex: 1;
+  display: flex;
+  flex-flow: row;
   position: relative;
+  justify-content: space-between;
 }
 
 .DOB {
@@ -85,18 +92,13 @@ img {
 }
 
 h2 {
-  font-size: 11px;
+  font-size: 10px;
   margin-bottom: 1px;
   margin-top: 1px;
-
-  > span {
-    background: rgba(255,255,255,0.5);
-    border-radius: 5px;
-    box-shadow: 0 0 5px 0px rgba(255,255,255,1);
-    padding-right: 5px;
-  }
 }
 
 :host {
-  display: block;
+  display: flex;
+  flex-flow: row wrap;
+  page-break-inside: avoid;
 }

@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy proxy.config.json",
+    "start": "ng serve --proxy proxy.config.json --host 0.0.0.0",
     "build": "ng build --prod --aot --no-sourcemap",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",

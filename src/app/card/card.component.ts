@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ICard} from '../data.service';
 import * as googlePhoneLib from 'google-libphonenumber';
 
 @Component({
@@ -7,10 +8,20 @@ import * as googlePhoneLib from 'google-libphonenumber';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: ICard;
   @Input() imageUrl: string;
 
   date = new Date().toLocaleDateString();
+
+  get middle() {
+    if (!this.data || !this.data.middleName) {
+      return '';
+    // } else if (/^[a-zA-Z]/.test(this.data.middleName)) {
+    //   return this.data.middleName[0].toUpperCase();
+    } else {
+      return this.data.middleName;
+    }
+  }
 
   phoneUtils = new googlePhoneLib.PhoneNumberUtil();
 
