@@ -10,10 +10,20 @@ export class PrintComponent implements OnInit {
 
   cards: ICard[] = [];
 
-  constructor(data: DataService) { 
-    data.getAllCards().then((cards) => {
+  constructor(private data: DataService) {
+    this.updateCards();
+  }
+
+  updateCards() {
+    this.data.getCards({ printed: false }).then((cards) => {
       this.cards = cards;
-    })
+    });
+  }
+
+  printed() {
+    this.data.markAsPrinted(this.cards).then(() => {
+      this.updateCards();
+    });
   }
 
   ngOnInit() {

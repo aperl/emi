@@ -1,3 +1,4 @@
+<button md-raised-button (click)="printed()">MARK AS PRINTED</button>
 <div *ngFor="let card of cards">
   <app-card [data]="card" [imageUrl]="card.imageUrl"></app-card>
 </div>

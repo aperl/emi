@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Data } from 'cropperjs';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams, QueryEncoder } from '@angular/http';
 import * as Cropper from 'cropperjs';
 import { environment } from '../environments/environment';
 import 'rxjs/Rx';
@@ -131,16 +131,34 @@ export class DataService {
     this._image = null;
   }
 
-  getAllCards(): Promise<ICard[]> {
-    return this.http.get('api/card').toPromise().then(resp => {
+  getCards(filter?: any): Promise<ICard[]> {
+
+    let params = new URLSearchParams();
+    if (filter) {
+      params.append('filter', JSON.stringify(filter));
+    }
+
+    return this.http.get('api/card', { search: params }).toPromise().then(resp => {
       let cards = resp.json() as ICard[];
       cards.forEach((card) => {
-        if(card.image) {
+        if (card.image) {
           card.imageUrl = '/images/' + card.image;
         }
       });
       return cards;
     });
+  }
+
+  markAsPrinted(cards: ICard[]) {
+
+    let req = cards.map(card => {
+      return { id: card._id, data: { $set: { printed: true }}};
+    });
+
+    let formData = new FormData();
+    formData.append('update', JSON.stringify(req));
+
+    return this.http.put('api/card', formData).toPromise();
   }
 
   sendPrint(): Promise<any> {
@@ -168,12 +186,11 @@ export class DataService {
       headers.append('Accept', 'application/json');
       let options = new RequestOptions({ headers: headers });
       this.http.post('api/card', formData, options).subscribe((result) => {
-        let response = result.json();
-        if (!response.error) {
+        if (result.ok) {
           this.clearData();
           resolve();
         } else {
-          reject(response.error);
+          reject(result.status);
         }
       }, reject);
     });
@@ -181,6 +198,7 @@ export class DataService {
 }
 
 export interface ICard {
+  _id?: string
   firstName: string;
   middleName: string;
   lastName: string;
