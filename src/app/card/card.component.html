@@ -14,7 +14,7 @@
       <div *ngIf="data?.emergencyContacts?.length">
         <h2>Emergency Contacts</h2>
         <div *ngFor="let contact of data?.emergencyContacts">
-          {{contact.name.trim()}}-<i>{{contact.relationship.trim().toLowerCase() }}</i><span class="together">&nbsp;{{formatPhone(contact.phoneNumber)}}</span>
+          {{contact.name.trim()}} - <i>{{contact.relationship.trim().toLowerCase() }}</i><span class="together">&nbsp;{{formatPhone(contact.phoneNumber)}}</span>
         </div>
       </div>
       <div *ngIf="data?.physicians?.length">

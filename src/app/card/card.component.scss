@@ -1,7 +1,6 @@
 .front,
 .back {
   display: inline-flex;
-  border: dashed 1px #ddd;
   padding: 0;
 
   width: 336px;
@@ -12,16 +11,13 @@
   flex-direction: column;
   vertical-align: top;
 
-  box-sizing: border-box;
-
-
   *:not(md-icon) {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 }
 
 .front {
-  border-right: none;
+  border-right: dashed 1px #ddd;
 }
 
 .back .fields{
@@ -50,7 +46,7 @@
 img {
   // position: absolute;
   // top: 0;
-  height: 156px;
+  height: 158px;
   z-index: -1;
 }
 
@@ -101,4 +97,12 @@ h2 {
   display: flex;
   flex-flow: row wrap;
   page-break-inside: avoid;
+
+  border: dashed 1px #ddd;
+  border-bottom: none;
+  box-sizing: border-box;
+
+  &::last-child {
+    border-bottom: dashed 1px #ddd;
+  }
 }

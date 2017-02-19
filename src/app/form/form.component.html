@@ -78,7 +78,7 @@
         <button md-icon-button (click)="contacts.removeAt(i)" md-tooltip="Remove Contact"><md-icon >close</md-icon></button>
       </div>
     </div>
-    <button md-button (click)="contacts.push(makeContactGroup())" *ngIf="contacts.controls.length < 2"><md-icon>add</md-icon> ADD CONTACT</button>
+    <button md-button (click)="contacts.push(makeContactGroup())" *ngIf="contacts.controls.length < 3"><md-icon>add</md-icon> ADD CONTACT</button>
   </md-card>
 
   <h3>Physicians</h3>
@@ -94,7 +94,7 @@
         <button md-icon-button (click)="physicians.removeAt(i)" md-tooltip="Remove Physician"><md-icon >close</md-icon></button>
       </div>
     </div>
-    <button md-button (click)="physicians.push(makePhysicianGroup())" *ngIf="physicians.controls.length < 2"><md-icon>add</md-icon> ADD PHYSICIAN</button>
+    <button md-button (click)="physicians.push(makePhysicianGroup())" *ngIf="physicians.controls.length < 3"><md-icon>add</md-icon> ADD PHYSICIAN</button>
   </md-card>
 
   <h3>Medical Conditions</h3>
