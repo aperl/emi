@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, ICard } from '../data.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-print',
@@ -15,8 +16,8 @@ export class PrintComponent implements OnInit {
   }
 
   updateCards() {
-    this.data.getCards({ printed: false }).then((cards) => {
-      this.cards = cards;
+    this.data.getCards({ printed: false }).subscribe((cards) => {
+      this.cards = _.flatMap(cards, card => _.fill(Array(card.count), card));
     });
   }
 

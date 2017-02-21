@@ -108,24 +108,44 @@ export class FormComponent {
       this.medications = fb.array([]);
       this.allergies = fb.array([]);
 
-      value = {};
+      value = {
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        dateOfBirth: '',
+        phoneNumber: '',
+        bloodType: '',
+        address: {
+          street: '',
+          street2: '',
+          city: 'Orem',
+          state: 'UT',
+          zip: '84097'
+        },
+        emergencyContacts: [],
+        physicians: [],
+        medicalConditions: [],
+        medications: [],
+        allergies: [],
+        otherInfo: ''
+      };
 
     }
 
     this.form = fb.group({
-      firstName: [value.firstName || '', Validators.required],
-      middleName: [value.middleName || ''],
-      lastName: [value.lastName || '', Validators.required],
-      dateOfBirth: [value.dateOfBirth || '', [Validators.required, dateValidator]],
-      phoneNumber: [value.phoneNumber || '', phoneValidator],
-      bloodType: [value.bloodType || '', Validators.required],
-      address: value.address ? this.makeAddressGroup(value.address) : this.makeAddressGroup(),
+      firstName: [value.firstName, Validators.required],
+      middleName: [value.middleName],
+      lastName: [value.lastName, Validators.required],
+      dateOfBirth: [value.dateOfBirth, [Validators.required, dateValidator]],
+      phoneNumber: [value.phoneNumber, phoneValidator],
+      bloodType: [value.bloodType, Validators.required],
+      address: this.makeAddressGroup(value.address),
       emergencyContacts: this.contacts,
       physicians: this.physicians,
       medicalConditions: this.conditions,
       medications: this.medications,
       allergies: this.allergies,
-      otherInfo: [value.otherInfo || '']
+      otherInfo: [value.otherInfo]
     });
 
     this.form.get('bloodType').valueChanges.subscribe((bloodType) => {

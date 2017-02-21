@@ -133,19 +133,20 @@ export class DataService {
     this._image = null;
   }
 
-  getCards(filter?: any): Promise<ICard[]> {
+  getCards(filter?: any): Observable<ICard[]> {
 
     let params = new URLSearchParams();
     if (filter) {
       params.append('filter', JSON.stringify(filter));
     }
 
-    return this.http.get('api/card', { search: params }).toPromise().then(resp => {
+    return this.http.get('api/card', { search: params }).map(resp => {
       let cards = resp.json() as ICard[];
       cards.forEach((card) => {
         if (card.image) {
           card.imageUrl = '/images/' + card.image;
         }
+        card.count = card.count || 1;
       });
       return cards;
     });

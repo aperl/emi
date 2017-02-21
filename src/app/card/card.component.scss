@@ -113,7 +113,7 @@ h2 {
     border-bottom: 0;
   }
 
-  &:last-child {
+  &:last-of-type {
     .front,
     .back {
       border-bottom: dashed 1px #ddd;
