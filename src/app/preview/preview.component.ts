@@ -44,18 +44,14 @@ export class PreviewComponent implements OnInit {
     }
 
     this.form = fb.group({
-      count: [1, [Validators.required, countValidator]]
+      count: [this.data.count, [Validators.required, countValidator]]
     });
+
+    this.updateCount(this.data.count);
 
     this.form.get('count').valueChanges.subscribe((value) => {
       let count = parseInt(value, 10);
-      if (count >= 1 && count <= 5) {
-        this.cards = [];
-        for (let i = 0; i < count - 1; i++) {
-          this.cards.push(true);
-        }
-      }
-
+      this.updateCount(count);
     });
 
     this.card = data.formValue;
@@ -78,6 +74,16 @@ export class PreviewComponent implements OnInit {
         this.printed = true;
       }
     });
+  }
+
+  private updateCount(count) {
+    if (count >= 1 && count <= 5) {
+      this.cards = [];
+      for (let i = 0; i < count - 1; i++) {
+        this.cards.push(true);
+      }
+      this.data.count = count;
+    }
   }
 
   upload() {

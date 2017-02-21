@@ -10,7 +10,7 @@ let storage = environment.storage;
 
 @Injectable()
 export class DataService {
-  private _formValue: any;
+  private _formValue: ICard;
   private _cropData: Data;
   private _croppedImage: Blob;
   private _image: Blob;
@@ -24,6 +24,8 @@ export class DataService {
         let data = storage.getItem('count');
         if (data) {
           this._count = JSON.parse(data);
+        } else {
+          this._count = 1;
         }
       } catch (error) {}
       try {
@@ -71,11 +73,11 @@ export class DataService {
     }
   }
 
-  get formValue(): any {
+  get formValue(): ICard {
     return this._formValue;
   }
 
-  set formValue(value: any) {
+  set formValue(value: ICard) {
     this._formValue = value;
     if (storage) {
       storage.setItem('form', JSON.stringify(value));
@@ -180,9 +182,10 @@ export class DataService {
         formData.append('image', this.croppedImage, 'image.jpeg');
       }
 
-      this.formValue.count = this.count;
+      let val = this.formValue;
+      val.count = this.count;
 
-      formData.append('data', JSON.stringify(this.formValue));
+      formData.append('data', JSON.stringify(val));
       headers.append('Accept', 'application/json');
       let options = new RequestOptions({ headers: headers });
       this.http.post('api/card', formData, options).subscribe((result) => {
@@ -198,7 +201,7 @@ export class DataService {
 }
 
 export interface ICard {
-  _id?: string
+  _id?: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -212,6 +215,7 @@ export interface ICard {
   medications: IMedication[];
   allergies: string[];
   otherInfo: string;
+  count?: number;
   image?: string;
   imageUrl?: string;
 }

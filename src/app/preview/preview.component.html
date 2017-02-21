@@ -9,8 +9,10 @@ Please indicate how many copies of this card you would like printed.</p>
     <md-hint class="error">Must be from 1 to 5</md-hint>
   </md-input>
 </form>
-<app-card [data]="card" [imageUrl]="imgUrl"></app-card>
-<app-card class="print-show" *ngFor="let a of cards" [data]="card" [imageUrl]="imgUrl"></app-card>
+<div class="cards">
+  <app-card [data]="card" [imageUrl]="imgUrl"></app-card>
+  <app-card class="print-show" *ngFor="let a of cards" [data]="card" [imageUrl]="imgUrl"></app-card>
+</div>
 <div class="button-bar">
   <button md-button routerLink="/"><md-icon>keyboard_arrow_left</md-icon> BACK</button>
   <button md-raised-button *ngIf="printed" (click)="next()">CREATE NEXT CARD</button>

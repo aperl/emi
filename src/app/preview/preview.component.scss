@@ -12,9 +12,17 @@
   }
 }
 
+.cards {
+  @media screen {
+    position: relative;
+    overflow: auto;
+    width: 100vw;
+  }
+}
+
 .print-show {
   @media screen {
-    display: none;
+    // display: none;
   }
 }
 

@@ -3,6 +3,8 @@
   display: inline-flex;
   padding: 0;
 
+  min-width: 336px;
+  max-width: 336px;
   width: 336px;
   height: 192px;
 
@@ -11,13 +13,21 @@
   flex-direction: column;
   vertical-align: top;
 
+  border: dashed 1px #ddd;
+
   *:not(md-icon) {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
+
 }
 
 .front {
-  border-right: dashed 1px #ddd;
+  border-right: 0;
+
+  @media screen and (max-width: 673px) {
+    border-right: dashed 1px #ddd;
+    border-bottom: 0;
+  }
 }
 
 .back .fields{
@@ -44,8 +54,6 @@
 }
 
 img {
-  // position: absolute;
-  // top: 0;
   height: 158px;
   z-index: -1;
 }
@@ -98,11 +106,17 @@ h2 {
   flex-flow: row wrap;
   page-break-inside: avoid;
 
-  border: dashed 1px #ddd;
-  border-bottom: none;
-  box-sizing: border-box;
+  min-width: 337px;
 
-  &::last-child {
-    border-bottom: dashed 1px #ddd;
+  .front,
+  .back {
+    border-bottom: 0;
+  }
+
+  &:last-child {
+    .front,
+    .back {
+      border-bottom: dashed 1px #ddd;
+    }
   }
 }
